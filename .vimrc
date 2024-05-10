@@ -152,3 +152,5 @@ if &diff
   highlight DiffChange cterm=BOLD ctermfg=NONE ctermbg=23
   highlight DiffText   cterm=BOLD ctermfg=NONE ctermbg=23
 endif
+
+set shortmess-=S
