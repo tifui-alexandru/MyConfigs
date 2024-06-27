@@ -1,10 +1,5 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
-end
-eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-alex@alex ~> cat .config/fish/conf.d/config.fish 
-if status is-interactive
-    # Commands to run in interactive sessions can go here
     export FZF_DEFAULT_COMMAND='rg --files'
     export FZF_DEFAULT_OPTS='-m --height 50% --border'
 end
@@ -13,6 +8,7 @@ set fish_greeting ""
 
 # use bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
 
 # "aliases"
 
