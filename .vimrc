@@ -375,4 +375,8 @@ highlight CocInlayHint cterm=italic ctermfg=244 guifg=#75715E gui=italic
 
 " Better search highlighting
 highlight clear Search
-highlight Search term=reverse cterm=reverse gui=reverse
+highlight Search term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey 
+highlight clear IncSearch
+highlight IncSearch term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey 
+highlight clear CocListLine
+highlight CocListLine term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey 
