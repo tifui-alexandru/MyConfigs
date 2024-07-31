@@ -20,6 +20,7 @@ set ttymouse=sgr
 
 nnoremap <leader>pv :Ex<CR>
 
+set incsearch
 set hlsearch
 set number
 set relativenumber
@@ -32,7 +33,11 @@ call plug#begin()
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
+Plug 'lervag/vimtex'
+" Plug 'dense-analysis/ale'
+" https://github.com/markonm/traces.vim for inccommand in vim
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
 Plug 'instant-markdown/vim-instant-markdown'
 Plug 'jupyter-vim/jupyter-vim'
@@ -42,6 +47,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'tamarin-prover/editors'
+Plug 'TabbyML/vim-tabby'
+let g:tabby_keybinding_accept = '<Tab>'
 call plug#end()
 filetype plugin indent on
 
@@ -51,11 +58,11 @@ filetype plugin indent on
 
 set hidden
 
-let g:ale_linters = {
-\   'python': ['flake8', 'mypy', 'pylint', 'pyright', 'ruff'],
-\}
-
-let g:ale_warn_about_trailing_whitespace = 0"
+" let g:ale_linters = {
+" \   'python': ['flake8', 'mypy', 'pylint', 'pyright', 'ruff'],
+" \}
+" 
+" let g:ale_warn_about_trailing_whitespace = 0"
 
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_show_diagnostics_ui = 0
@@ -300,7 +307,36 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 " Add (Neo)Vim's native statusline support
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}\ %f
+set statusline+=\%M
+
+" let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.colnr = ' ℅:'
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ' :'
+let g:airline_symbols.maxlinenr = '☰ '
+let g:airline_symbols.dirty='⚡'
+
+"let g:airline_section_warning=''
+"let g:airline_skip_empty_sections = 1
+
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#coc#error_symbol = 'E:'
+let g:airline#extensions#coc#warning_symbol = 'W:'
+let g:airline#extensions#coc#show_coc_status = 1
+
+let g:airline#extensions#coc#stl_format_err = '%C(L%L)'
+let g:airline#extensions#coc#stl_format_warn = '%C(L%L)'
 
 " Mappings for CoCList
 " Show all diagnostics
@@ -333,3 +369,10 @@ highlight CocFloatActive cterm=BOLD ctermfg=NONE ctermbg=240 guibg=#75715E guifg
 
 " CocMenuSel: Selected menu item should have a high contrast
 highlight CocMenuSel cterm=BOLD ctermfg=NONE ctermbg=105 guibg=#FFD866 guifg=NONE
+
+" CocInlayHint: Subtle color for inlay hints, blending well with Monokai Pro
+highlight CocInlayHint cterm=italic ctermfg=244 guifg=#75715E gui=italic
+
+" Better search highlighting
+highlight clear Search
+highlight Search term=reverse cterm=reverse gui=reverse
