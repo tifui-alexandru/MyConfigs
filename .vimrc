@@ -38,6 +38,7 @@ Plug 'lervag/vimtex'
 " https://github.com/markonm/traces.vim for inccommand in vim
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'preservim/nerdtree'
 Plug 'instant-markdown/vim-instant-markdown'
 Plug 'jupyter-vim/jupyter-vim'
@@ -48,9 +49,18 @@ Plug 'sheerun/vim-polyglot'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'tamarin-prover/editors'
 Plug 'TabbyML/vim-tabby'
-let g:tabby_keybinding_accept = '<Tab>'
+Plug 'tpope/vim-commentary'
+Plug 'mbbill/undotree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons' " ALWAYS THE LAST ONE
+
+" let g:tabby_trigger_mode = 'manual'
+let g:tabby_keybinding_accept = '<C-p>'
 call plug#end()
 filetype plugin indent on
+
+" UndoTree mapping
+nnoremap <F5> :UndotreeToggle<CR>
 
 " Color scheme
 " set termguicolors
@@ -356,6 +366,14 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" TMUX navigator key bindings 
+" let g:tmux_navigator_no_mappings = 1
+" 
+" nnoremap <silent> <C-a><Left> :<C-U>TmuxNavigateLeft<cr>
+" nnoremap <silent> <C-a><Down> :<C-U>TmuxNavigateDown<cr>
+" nnoremap <silent> <C-a><Up> :<C-U>TmuxNavigateUp<cr>
+" nnoremap <silent> <C-a><Right> :<C-U>TmuxNavigateRight<cr>
+
 "Chat GPT generated color shceme that works with Monokai Pro
 
 " CocFloating: Background color should be a dark shade, with bold text
@@ -379,4 +397,4 @@ highlight Search term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey
 highlight clear IncSearch
 highlight IncSearch term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey 
 highlight clear CocListLine
-highlight CocListLine term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey 
+highlight CocListLine term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey
