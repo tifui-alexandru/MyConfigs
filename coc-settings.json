@@ -1,0 +1,66 @@
+{
+  "workspace.ignoredFolders": [
+    "/home/alex",
+    "/home/alex/.cargo/**",
+    "/home/alex/.rustup/**",
+    "/home/alex/.venv/**",
+    "/home/alex/.cache/**",
+    "**/__pycache__/**",
+    "**/.git/**"
+  ],
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
+    },
+    "rust-analyzer": {
+      "command": "rust-analyzer",
+      "filetypes": ["rust"],
+      "rootPatterns": ["Cargo.toml", "rust-project.json"],
+      "settings": {
+        "rust-analyzer": {
+          "checkOnSave": {
+            "allTargets": false
+          },
+          "procMacro": {
+            "enable": true
+          },
+          "cargo": {
+            "allFeatures": true
+          },
+          "workspace": {
+            "ignored": [
+              "/home/alex",
+              "/home/alex/.cargo/**",
+              "/home/alex/.rustup/**"
+            ]
+          },
+          "rustfmt": {
+            "enableRangeFormatting": true
+          }
+        }
+      }
+    }
+  },
+  "clang-format.executable": "clang-format",
+  "clang-format.style": "file",
+  "coc.preferences.formatOnSaveFiletypes": ["c", "cpp", "objc", "objcpp", "rust"],
+  "suggest.noselect": true,
+  "python.pythonPath": "/usr/bin/python3",
+  "python.analysis.exclude": [
+    "/home/alex",
+    "/home/alex/.venv/**",
+    "/home/alex/.cache/**",
+    "**/__pycache__/**",
+    "**/.git/**"
+  ],
+  "pyright.inlayHints.variableTypes": false,
+  "pyright.inlayHints.functionReturnTypes": false,
+  "pyright.inlayHints.parameterTypes": false,
+}
