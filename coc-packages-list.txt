@@ -1,0 +1,6 @@
+coc-json
+coc-tsserver
+coc-highlight
+coc-rust-analyzer
+coc-pairs
+coc-pyright
