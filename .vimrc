@@ -10,6 +10,7 @@ set autoindent
 " autocmd VimEnter * NERDTree
 
 set laststatus=2
+set cmdheight=1
 set tabline=%F\ %y
 
 set mouse+=a
@@ -19,6 +20,12 @@ set ttymouse=sgr
 " set textwidth=80
 
 nnoremap <leader>pv :Ex<CR>
+
+" remap {/} to Ctrl + {/} to keep the paragraph navigation feature
+nnoremap <C-{> {
+nnoremap <C-}> }
+vnoremap <C-{> {
+vnoremap <C-}> }
 
 set incsearch
 set hlsearch
@@ -348,6 +355,15 @@ let g:airline#extensions#coc#show_coc_status = 1
 let g:airline#extensions#coc#stl_format_err = '%C(L%L)'
 let g:airline#extensions#coc#stl_format_warn = '%C(L%L)'
 
+" vim-tmux-navigator configuration
+let g:tmux_navigator_no_mappings = 1
+
+" Remap Shift + Arrow keys for window navigation
+nnoremap <S-Left> :<C-U>TmuxNavigateLeft<cr>
+nnoremap <S-Down> :<C-U>TmuxNavigateDown<cr>
+nnoremap <S-Up> :<C-U>TmuxNavigateUp<cr>
+nnoremap <S-Right> :<C-U>TmuxNavigateRight<cr>
+
 " Mappings for CoCList
 " Show all diagnostics
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -365,14 +381,6 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-" TMUX navigator key bindings 
-" let g:tmux_navigator_no_mappings = 1
-" 
-" nnoremap <silent> <C-a><Left> :<C-U>TmuxNavigateLeft<cr>
-" nnoremap <silent> <C-a><Down> :<C-U>TmuxNavigateDown<cr>
-" nnoremap <silent> <C-a><Up> :<C-U>TmuxNavigateUp<cr>
-" nnoremap <silent> <C-a><Right> :<C-U>TmuxNavigateRight<cr>
 
 "Chat GPT generated color shceme that works with Monokai Pro
 
@@ -397,4 +405,4 @@ highlight Search term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey
 highlight clear IncSearch
 highlight IncSearch term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey 
 highlight clear CocListLine
-highlight CocListLine term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey
+highlight CocListLine term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey 
