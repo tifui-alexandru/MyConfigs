@@ -27,6 +27,9 @@ nnoremap <C-}> }
 vnoremap <C-{> {
 vnoremap <C-}> }
 
+" remap increment/decrement to use it inside tmux (C-b -> C-a for tmux)
+nnoremap <C-z> <C-a>
+
 set incsearch
 set hlsearch
 set number
@@ -58,6 +61,7 @@ Plug 'tamarin-prover/editors'
 Plug 'TabbyML/vim-tabby'
 Plug 'tpope/vim-commentary'
 Plug 'mbbill/undotree'
+Plug 'ThePrimeagen/harpoon'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons' " ALWAYS THE LAST ONE
 
@@ -109,8 +113,8 @@ inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "'" ? "\<Right>" : "''<left>"
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"<left>"
 " # enclose a word in normal mode with "'({[
-nnoremap ' mmbi'<esc>ea'<esc>`m<right>
-nnoremap " mmbi"<esc>ea"<esc>`m<right>
+" nnoremap ' mmbi'<esc>ea'<esc>`m<right>
+" nnoremap " mmbi"<esc>ea"<esc>`m<right>
 nnoremap ( mmbi(<esc>ea)<esc>`m<right>
 nnoremap { mmbi{<esc>ea}<esc>`m<right>
 nnoremap [ mmbi[<esc>ea]<esc>`m<right>
@@ -124,6 +128,13 @@ vnoremap [ <Esc>`<i[<Esc>`>a<right>]<Esc>
 set pastetoggle=<F2>
 
 " # FZF mappings
+" Custom Rg command with preview window
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   'rg --max-count=1000 --no-heading --smart-case --hidden --glob "!.git/*" '.shellescape(<q-args>), 1,
+"   \   fzf#vim#with_preview({'options': '--preview "bat --style=numbers --color=always --line-range :500 {}"'}),
+"   \   <bang>0)
+
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <Leader>f :Rg<CR>
 
@@ -364,6 +375,13 @@ nnoremap <S-Down> :<C-U>TmuxNavigateDown<cr>
 nnoremap <S-Up> :<C-U>TmuxNavigateUp<cr>
 nnoremap <S-Right> :<C-U>TmuxNavigateRight<cr>
 
+" Additional mappings using Alt + h/j/k/l for window navigation
+nnoremap <M-h> :<C-U>TmuxNavigateLeft<cr>
+nnoremap <M-j> :<C-U>TmuxNavigateDown<cr>
+nnoremap <M-k> :<C-U>TmuxNavigateUp<cr>
+nnoremap <M-l> :<C-U>TmuxNavigateRight<cr>
+set timeout timeoutlen=300 ttimeout ttimeoutlen=10
+
 " Mappings for CoCList
 " Show all diagnostics
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -406,3 +424,13 @@ highlight clear IncSearch
 highlight IncSearch term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey 
 highlight clear CocListLine
 highlight CocListLine term=standout ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey 
+
+" vimtex changes to be able to add SVGs into latex documents
+let g:vimtex_compiler_latexmk = {
+    \ 'options' : [
+    \   '-shell-escape',
+    \   '-pdf',
+    \   '-interaction=nonstopmode',
+    \   '-synctex=1'
+    \ ]
+\ }
